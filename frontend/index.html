@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RecycArm Live Dashboard</title>
+    <!-- Portfolio CSS Links -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="mediaqueries.css" />
+  </head>
+  <body>
+    <!-- DESKTOP NAVIGATION SECTION -->
+    <nav id="desktop-nav">
+      <div class="logo">RecycArm Dashboard</div>
+      <div>
+        <ul class="nav-links">
+          <li><a href="#dashboard">Live Data</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- HAMBURGER NAVIGATION SECTION -->
+    <nav id="hamburger-nav">
+      <div class="logo">RecycArm Dashboard</div>
+      <div class="hamburger-menu">
+        <div class="hamburger-icon" onclick="toggleMenu()">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="menu-links">
+          <li><a href="#dashboard" onclick="toggleMenu()">Live Data</a></li>
+        </div>
+      </div>
+    </nav>
+
+    <!-- MAIN DASHBOARD SECTION -->
+    <section id="dashboard">
+      <div class="section__text">
+        <p class="section__text__p1">Autonomous Trash Collection</p>
+        <h1 class="title">RecycArm Live Status</h1>
+
+        <!-- Live Status Indicators -->
+        <div id="socials-container" class="status-bar-container">
+          <div class="status-item">
+            <span class="section__text__p2">Robot Status: </span>
+            <strong id="robot-status" class="status-indicator">OFFLINE</strong>
+          </div>
+          <div class="status-item">
+            <span class="section__text__p2">Last Update: </span>
+            <strong id="last-updated">N/A</strong>
+          </div>
+        </div>
+
+        <!-- Live Data Cards Section -->
+        <div class="live-cards-container">
+          <div class="details-container card-color-1">
+            <h2>Organic Waste</h2>
+            <p id="organic">N/A</p>
+          </div>
+
+          <div class="details-container card-color-2">
+            <h2>Anorganic Waste</h2>
+            <p id="anorganic">N/A</p>
+          </div>
+        </div>
+
+        <!-- Call to Action buttons -->
+        <div class="btn-container">
+          <button class="btn btn-color-2" onclick="fetchAndDisplayData()">
+            Refresh Now
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER SECTION -->
+    <footer>
+      <p>Copyright &#169; 2025 RecycArm Robotics Team</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
