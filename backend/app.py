@@ -1,20 +1,24 @@
-# app.py - FINAL CODE FOR HOSTING
+# app.py - FINAL CODE WITH WIB TIMEZONE
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS 
 from datetime import datetime
+import pytz # NEW IMPORT: Needed for timezone handling
 
 app = Flask(__name__)
 CORS(app) 
 
 # --- UPDATED Data Storage ---
-# Now stores both organic and anorganic counts.
+# Stores the latest trash counts and the WIB timestamp.
 latest_trash_data = {
     "organic_trash_count": 0.0,
     "anorganic_trash_count": 0.0,
     "last_updated": "N/A"
 }
 # ----------------------------
+
+# Define the target timezone (Jakarta is WIB: Western Indonesian Time)
+WIB_TIMEZONE = pytz.timezone('Asia/Jakarta')
 
 # Endpoint 1: Receiving data from the Jetson (using POST)
 @app.route('/update_count', methods=['POST'])
@@ -23,17 +27,23 @@ def update_count():
     if request.is_json:
         data = request.get_json()
         
-        # Check for required fields and ensure they are numbers
+        # Check for required fields
         if ('organic_trash_count' in data and 
             'anorganic_trash_count' in data):
             
             try:
                 global latest_trash_data
                 
-                # Convert inputs to floats (assuming the Jetson sends numbers)
+                # 1. Get current time, localize it to WIB
+                now_wib = datetime.now(WIB_TIMEZONE)
+                
+                # 2. Format the WIB time string
+                timestamp_wib = now_wib.strftime("%Y-%m-%d %H:%M:%S")
+
+                # Update stored data
                 latest_trash_data['organic_trash_count'] = float(data['organic_trash_count'])
                 latest_trash_data['anorganic_trash_count'] = float(data['anorganic_trash_count'])
-                latest_trash_data['last_updated'] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                latest_trash_data['last_updated'] = timestamp_wib # Save the WIB time
                 
                 print(f"Data received: Organic={latest_trash_data['organic_trash_count']}, Anorganic={latest_trash_data['anorganic_trash_count']}")
                 return jsonify({"message": "Data received and updated"}), 200
