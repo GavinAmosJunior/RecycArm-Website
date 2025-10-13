@@ -7,12 +7,12 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Added for consistent sizing */
+  box-sizing: border-box;
 }
 
 body {
   font-family: "Poppins", sans-serif;
-  padding-top: 13vh; /* Prevents content hiding under sticky nav */
+  padding-top: 13vh;
 }
 
 html {
@@ -29,7 +29,7 @@ btn {
 }
 
 /* ------------------------------------------------------------------ */
-/* NAVIGATION & HEADER STYLES (Kept from Portfolio) */
+/* NAVIGATION & HEADER STYLES (Reverted to Original Portfolio Flow) */
 /* ------------------------------------------------------------------ */
 
 nav,
@@ -38,6 +38,7 @@ nav,
 }
 
 nav {
+  /* Restores the original layout: Logo on far left, Links on far right */
   justify-content: space-around;
   align-items: center;
   height: 13vh;
@@ -160,7 +161,7 @@ section {
   min-height: 87vh; /* Adjusted for better fit */
   scroll-margin-top: 13vh;
   display: flex;
-  flex-direction: column; /* Changed for dashboard flow */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -237,6 +238,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Ensures vertical centering of the entire content block */
   justify-content: center;
 }
 
@@ -245,6 +247,8 @@ section {
   text-align: center;
   width: 100%;
   max-width: 800px;
+  /* Added margin-bottom to ensure center title spacing */
+  margin-bottom: 2rem;
 }
 
 .section__text p {
@@ -269,8 +273,9 @@ section {
   margin: 1.5rem 0;
   gap: 2rem;
   padding: 1rem 0;
-  border-top: 1px solid rgb(230, 230, 230);
-  border-bottom: 1px solid rgb(230, 230, 230);
+  /* --- FIX: Removed hard borders for cleaner look --- */
+  border-top: none;
+  border-bottom: none;
 }
 
 .status-indicator {
@@ -312,7 +317,7 @@ section {
   border-radius: 1.5rem;
   border: rgb(163, 163, 163) 0.1rem solid;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); /* Added subtle shadow for depth */
 }
 
 .details-container h2 {
