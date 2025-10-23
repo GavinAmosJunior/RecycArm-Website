@@ -1,6 +1,6 @@
 // --- CONFIGURATION ---
 // !!! IMPORTANT: This is the local test URL. REPLACE this with your public Render URL before deploying.
-const API_URL = "https://recycarm-api.onrender.com/get_count";
+const API_URL = "https://recycarm-api.onrender.com/get_fullness";
 const FETCH_INTERVAL = 4000; // Fetch data every 4 seconds
 // --- END CONFIGURATION ---
 
@@ -32,10 +32,11 @@ function fetchAndDisplayData() {
     })
     .then((data) => {
       // 2. Update the HTML elements (Organic/Anorganic cards)
+      // Read the percentage keys and display them with a '%' sign.
       document.getElementById("organic").textContent =
-        data.organic_trash_count.toFixed(1) + " kg";
+        data.organic_fullness_percent.toFixed(1) + " %";
       document.getElementById("anorganic").textContent =
-        data.anorganic_trash_count.toFixed(1) + " kg";
+        data.anorganic_fullness_percent.toFixed(1) + " %";
 
       // 3. Update Status Bar
       statusElement.textContent = "ONLINE";
@@ -43,7 +44,7 @@ function fetchAndDisplayData() {
       statusElement.classList.remove("offline", "fetching");
       lastUpdatedElement.textContent = data.last_updated;
 
-      console.log("Dashboard updated with live data.");
+      console.log("Dashboard updated with live data (Fullness Percentage).");
     })
     .catch((error) => {
       // 4. Handle errors (e.g., if the server is offline)
