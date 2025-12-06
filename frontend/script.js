@@ -1,6 +1,6 @@
 // CONFIGURATION
 const API_URL = "https://recycarm-api.onrender.com/get_fullness";
-const FETCH_INTERVAL = 4000; // Fetch data every 4 seconds
+const FETCH_INTERVAL = 2000; // Fetch data every 4 seconds
 
 // Portfolio Utility Function (Hamburger Menu)
 function toggleMenu() {
