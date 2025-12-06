@@ -1,8 +1,6 @@
-// --- CONFIGURATION ---
-// !!! IMPORTANT: This is the local test URL. REPLACE this with your public Render URL before deploying.
+// CONFIGURATION
 const API_URL = "https://recycarm-api.onrender.com/get_fullness";
 const FETCH_INTERVAL = 4000; // Fetch data every 4 seconds
-// --- END CONFIGURATION ---
 
 // Portfolio Utility Function (Hamburger Menu)
 function toggleMenu() {

@@ -22,7 +22,7 @@ latest_trash_data = {
 # Define the target timezone (Jakarta is WIB: Western Indonesian Time)
 WIB_TIMEZONE = pytz.timezone('Asia/Jakarta')
 
-# Endpoint 1: Receiving data from the Jetson (using POST)
+# ENDPOINT POST
 @app.route('/update_fullness', methods=['POST'])
 def update_fullness():
     """
@@ -59,7 +59,7 @@ def update_fullness():
     else:
         return jsonify({"error": "Request must be JSON"}), 415
 
-# Endpoint 2: Sending data to the Website (using GET)
+# ENDPOINT GET
 @app.route('/get_fullness', methods=['GET'])
 def get_fullness():
     """Returns the latest stored bin fullness data to the website as JSON."""
