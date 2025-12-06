@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>RecycArm</title>
 
-    <!-- CSS STYLING -->
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="mediaqueries.css" />
   </head>
   <body>
-    <!-- NAVIGATION BAR -->
     <nav id="desktop-nav">
       <div class="logo">RecycArm Dashboard</div>
       <div>
@@ -18,20 +16,16 @@
       </div>
     </nav>
 
-    <!-- HAMBURGER NAV  -->
     <nav id="hamburger-nav">
       <div class="logo">RecycArm Dashboard</div>
       <div class="hamburger-menu">
       
     </nav>
 
-    <!-- MAIN DASHBOARD SECTION -->
     <section id="dashboard">
       <div class="section__text">
-        <p class="section__text__p1">Autonomous Trash Collection</p>
         <h1 class="title">RecycArm Live Status</h1>
 
-        <!-- Live Status Indicators -->
         <div id="socials-container" class="status-bar-container">
           <div class="status-item">
             <span class="section__text__p2">Robot Status: </span>
@@ -42,23 +36,23 @@
             <strong id="last-updated">N/A</strong>
           </div>
         </div>
-
-        <!-- Live Data Cards Section -->
+        
+        <div class="camera-feed-container">
+          <h2 class="section__text__p2">Live Camera Feed</h2>
+          <img id="camera-feed-img" src="" alt="Live Camera Feed" class="responsive-img">
+        </div>
         <div class="live-cards-container">
-          <!-- CARD 1: Non-Plastic Bin (Corresponds to 'organic' ID in JS) -->
           <div class="details-container card-color-1">
             <h2>Plastic Bottle</h2>
             <p id="organic">N/A</p>
           </div>
 
-          <!-- CARD 2: Plastic Bin (Corresponds to 'anorganic' ID in JS) -->
           <div class="details-container card-color-2">
             <h2>Paper Cup</h2>
             <p id="anorganic">N/A</p>
           </div>
         </div>
 
-        <!-- Call to Action buttons -->
         <div class="btn-container">
           <button class="btn btn-color-2" onclick="fetchAndDisplayData()">
             Refresh Now

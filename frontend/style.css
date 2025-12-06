@@ -228,18 +228,18 @@ section {
 }
 
 /* ------------------------------------------------------------------ */
-/* DASHBOARD SECTION (PROFILE) */
+/* DASHBOARD SECTION */
 /* ------------------------------------------------------------------ */
 
 #dashboard {
-  height: 87vh;
+  height: fit-content; /* Changed from 87vh to fit-content to accommodate camera feed */
   padding-top: 0;
   margin-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* Ensures vertical centering of the entire content block */
   justify-content: center;
+  padding-bottom: 5rem; /* Added bottom padding */
 }
 
 .section__text {
@@ -247,13 +247,12 @@ section {
   text-align: center;
   width: 100%;
   max-width: 800px;
-  /* Added margin-bottom to ensure center title spacing */
-  margin-bottom: 2rem;
+  margin-bottom: 2rem; /* Kept for title spacing */
 }
 
 .section__text p {
   font-weight: 600;
-  color: rgb(85, 85, 85); /* Use portfolio default color */
+  color: rgb(85, 85, 85);
 }
 
 .section__text__p1 {
@@ -261,7 +260,7 @@ section {
 }
 
 .section__text__p2 {
-  font-size: 1.25rem; /* Reduced from 1.75rem */
+  font-size: 1.25rem;
   margin-bottom: 0.5rem;
   font-weight: 500;
 }
@@ -273,9 +272,6 @@ section {
   margin: 1.5rem 0;
   gap: 2rem;
   padding: 1rem 0;
-  /* --- FIX: Removed hard borders for cleaner look --- */
-  border-top: none;
-  border-bottom: none;
 }
 
 .status-indicator {
@@ -304,9 +300,9 @@ section {
 .live-cards-container {
   display: flex;
   justify-content: center;
-  gap: 2rem;
+  gap: 3rem; /* Increased spacing between cards */
   flex-wrap: wrap;
-  margin-top: 2rem;
+  margin-top: 3rem; /* Increased top margin for separation from camera */
   width: 100%;
 }
 
@@ -317,7 +313,7 @@ section {
   border-radius: 1.5rem;
   border: rgb(163, 163, 163) 0.1rem solid;
   text-align: center;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); /* Added subtle shadow for depth */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
 }
 
 .details-container h2 {
@@ -334,12 +330,58 @@ section {
 
 /* Card Specific Colors */
 .card-color-1 {
-  /* Organic */
+  /* Plastic Bottle */
   border-color: #4caf50;
 }
 .card-color-2 {
-  /* Anorganic */
+  /* Paper Cup */
   border-color: #ff9800;
+}
+
+/* ------------------------------------------------------------------ */
+/* CAMERA FEED STYLES (NEW) */
+/* ------------------------------------------------------------------ */
+
+.camera-feed-container {
+  /* Ensures the container centers horizontally */
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border: rgb(163, 163, 163) 0.1rem solid;
+  border-radius: 1.5rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 600px; /* Limits the size of the camera block */
+  text-align: center;
+}
+
+/* Styles the actual image element */
+.responsive-img {
+  max-width: 100%; /* Ensures image shrinks to fit container */
+  height: auto;
+  min-height: 100px; /* Prevents image from being too small */
+  border-radius: 8px;
+  margin-top: 1rem;
+}
+
+/* Placeholder for No Camera Feed State */
+img.responsive-img[src=""] {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  height: 200px;
+  background-color: #f7f7f7;
+  border: 1px dashed #ccc;
+  line-height: 200px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  color: #777;
+  font-style: italic;
+  /* HACK: Use content to display alt text when src is empty */
+  content: attr(alt);
+  font-size: 1rem;
 }
 
 /* FOOTER SECTION (Kept from Portfolio) */

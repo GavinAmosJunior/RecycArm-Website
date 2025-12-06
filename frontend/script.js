@@ -14,6 +14,8 @@ function toggleMenu() {
 function fetchAndDisplayData() {
   const statusElement = document.getElementById("robot-status");
   const lastUpdatedElement = document.getElementById("last-updated");
+  // --- NEW: Get the image element ---
+  const cameraFeedElement = document.getElementById("camera-feed-img");
 
   // Set fetching status
   statusElement.textContent = "FETCHING...";
@@ -30,27 +32,45 @@ function fetchAndDisplayData() {
     })
     .then((data) => {
       // 2. Update the HTML elements (Organic/Anorganic cards)
-      // Read the percentage keys and display them with a '%' sign.
       document.getElementById("organic").textContent =
         data.organic_fullness_percent.toFixed(1) + " %";
       document.getElementById("anorganic").textContent =
         data.anorganic_fullness_percent.toFixed(1) + " %";
 
-      // 3. Update Status Bar
+      // 3. --- NEW: Camera Feed Logic ---
+      const base64String = data.camera_feed_base64;
+
+      if (base64String && base64String !== "None") {
+        // Prefix the Base64 string to form a Data URL for the image source
+        // Assuming the Jetson sends a JPEG image
+        cameraFeedElement.src = `data:image/jpeg;base64,${base64String}`;
+        cameraFeedElement.alt = "Live Camera Feed";
+      } else {
+        // Set placeholder if data is null or empty
+        cameraFeedElement.src = "";
+        cameraFeedElement.alt = "No Camera Feed Available";
+      }
+      // --- END NEW CAMERA LOGIC ---
+
+      // 4. Update Status Bar
       statusElement.textContent = "ONLINE";
       statusElement.classList.add("online");
       statusElement.classList.remove("offline", "fetching");
       lastUpdatedElement.textContent = data.last_updated;
 
-      console.log("Dashboard updated with live data (Fullness Percentage).");
+      console.log("Dashboard updated with live data and camera feed.");
     })
     .catch((error) => {
-      // 4. Handle errors (e.g., if the server is offline)
+      // 5. Handle errors (e.g., if the server is offline)
       console.error("Failed to connect to the server:", error);
 
       // Set cards to display error/offline status
       document.getElementById("organic").textContent = "N/A";
       document.getElementById("anorganic").textContent = "N/A";
+
+      // Also clear the camera feed on error
+      cameraFeedElement.src = "";
+      cameraFeedElement.alt = "Server Offline";
 
       // Update Status Bar
       statusElement.textContent = "OFFLINE";
