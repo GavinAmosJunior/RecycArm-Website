@@ -1,6 +1,6 @@
 // CONFIGURATION
 const API_URL = "https://recycarm-api.onrender.com/get_fullness";
-const FETCH_INTERVAL = 2000; // Fetch data every 4 seconds
+const FETCH_INTERVAL = 2000; // Fetch data every 2 seconds
 
 // Portfolio Utility Function (Hamburger Menu)
 function toggleMenu() {
@@ -14,10 +14,8 @@ function toggleMenu() {
 function fetchAndDisplayData() {
   const statusElement = document.getElementById("robot-status");
   const lastUpdatedElement = document.getElementById("last-updated");
-  // --- NEW: Get the image element ---
   const cameraFeedElement = document.getElementById("camera-feed-img");
 
-  // Set fetching status
   statusElement.textContent = "FETCHING...";
   statusElement.classList.remove("online", "offline");
   statusElement.classList.add("fetching");
@@ -32,25 +30,23 @@ function fetchAndDisplayData() {
     })
     .then((data) => {
       // 2. Update the HTML elements (Organic/Anorganic cards)
+      // --- MODIFIED: Display the state string directly (NO more .toFixed + %) ---
       document.getElementById("organic").textContent =
-        data.organic_fullness_percent.toFixed(1) + " %";
+        data.organic_fullness_percent;
       document.getElementById("anorganic").textContent =
-        data.anorganic_fullness_percent.toFixed(1) + " %";
+        data.anorganic_fullness_percent;
+      // --------------------------------------------------------------------------
 
-      // 3. --- NEW: Camera Feed Logic ---
+      // 3. Camera Feed Logic
       const base64String = data.camera_feed_base64;
 
       if (base64String && base64String !== "None") {
-        // Prefix the Base64 string to form a Data URL for the image source
-        // Assuming the Jetson sends a JPEG image
         cameraFeedElement.src = `data:image/jpeg;base64,${base64String}`;
         cameraFeedElement.alt = "Live Camera Feed";
       } else {
-        // Set placeholder if data is null or empty
         cameraFeedElement.src = "";
         cameraFeedElement.alt = "No Camera Feed Available";
       }
-      // --- END NEW CAMERA LOGIC ---
 
       // 4. Update Status Bar
       statusElement.textContent = "ONLINE";
