@@ -48,9 +48,9 @@ def update_fullness():
                 now_wib = datetime.now(WIB_TIMEZONE)
                 timestamp_wib = now_wib.strftime("%Y-%m-%d %H:%M:%S")
 
-                # --- MODIFIED: Store the state strings directly (NO float() conversion) ---
-                latest_trash_data['organic_fullness_percent'] = str(data['organic_fullness_percent']).strip()
-                latest_trash_data['anorganic_fullness_percent'] = str(data['anorganic_fullness_percent']).strip()
+                # --- FIX: Store the state strings as ALL CAPS (.upper()) for case-specificity ---
+                latest_trash_data['organic_fullness_percent'] = str(data['organic_fullness_percent']).upper().strip()
+                latest_trash_data['anorganic_fullness_percent'] = str(data['anorganic_fullness_percent']).upper().strip()
                 
                 # Update the timestamp
                 latest_trash_data['last_updated'] = timestamp_wib 

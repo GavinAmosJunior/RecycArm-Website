@@ -30,12 +30,11 @@ function fetchAndDisplayData() {
     })
     .then((data) => {
       // 2. Update the HTML elements (Organic/Anorganic cards)
-      // --- MODIFIED: Display the state string directly (NO more .toFixed + %) ---
+      // Display the state string directly (data is guaranteed to be ALL CAPS by app.py)
       document.getElementById("organic").textContent =
         data.organic_fullness_percent;
       document.getElementById("anorganic").textContent =
         data.anorganic_fullness_percent;
-      // --------------------------------------------------------------------------
 
       // 3. Camera Feed Logic
       const base64String = data.camera_feed_base64;
