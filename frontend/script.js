@@ -10,6 +10,22 @@ function toggleMenu() {
   icon.classList.toggle("open");
 }
 
+// Helper function to translate 1/0 states to FULL/NOT FULL (NEW CODE BLOCK)
+function mapState(value) {
+  // Coerce the input value to a number for reliable comparison
+  const numericValue = Number(value);
+
+  if (numericValue === 1) {
+    return "FULL";
+  } else if (numericValue === 0) {
+    return "NOT FULL";
+  } else {
+    // Return the original N/A or any other unexpected value
+    return value;
+  }
+}
+// End of NEW CODE BLOCK
+
 // Dashboard Live Data Function
 function fetchAndDisplayData() {
   const statusElement = document.getElementById("robot-status");
@@ -30,11 +46,14 @@ function fetchAndDisplayData() {
     })
     .then((data) => {
       // 2. Update the HTML elements (Organic/Anorganic cards)
-      // Display the state string directly (data is guaranteed to be ALL CAPS by app.py)
-      document.getElementById("organic").textContent =
-        data.organic_fullness_percent;
-      document.getElementById("anorganic").textContent =
-        data.anorganic_fullness_percent;
+      // *** UPDATED TO USE mapState() ***
+      document.getElementById("organic").textContent = mapState(
+        data.organic_fullness_percent
+      );
+      document.getElementById("anorganic").textContent = mapState(
+        data.anorganic_fullness_percent
+      );
+      // **********************************
 
       // 3. Camera Feed Logic
       const base64String = data.camera_feed_base64;
